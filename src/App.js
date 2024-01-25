@@ -1,24 +1,49 @@
-import logo from './logo.svg';
+import React, { useState, useContext } from 'react';
 import './App.css';
 
-function App() {
+// Создаем контекст
+const UserContext = React.createContext();
+
+const Login = () => {
+  const [name, setName] = useState('');
+  const { setUser } = useContext(UserContext);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='desc'>
+      <p>Welcome! Please start by telling us your name:</p>
+      <p>
+        <input 
+          type="text" 
+          id="user-name" 
+          placeholder="Your full name" 
+          onChange={(e) => setName(e.target.value)} 
+        />
+        {name && <button onClick={() => setUser(name)}>Войти</button>}
+      </p>
     </div>
+  );
+};
+
+function App() {
+  const [user, setUser] = useState(null);
+
+  return (
+    <UserContext.Provider value={{ user, setUser }}>
+      <div className="App">
+        <header className="App-header">
+          <p>PIZZA DAY</p>
+          <p><input type="text" id="query" placeholder="Search..."/></p>
+        </header>
+        <main className="App-main">
+          <div className='flash'>
+            <p>The best Pizza.</p>
+            <p className='flash-orange'>Straight out of the oven, straight to you!</p>
+          </div>
+          <Login />
+        </main>
+      </div>
+      {user && console.log(user)}
+    </UserContext.Provider>
   );
 }
 
