@@ -1,0 +1,30 @@
+
+.menu_items {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2%;
+  row-gap: 2%;
+  list-style: none;
+  margin-top: 5dvh;
+}
+
+.item_img-wrapper {
+  display: block; 
+  max-width: 100%; 
+  padding: 15px; 
+  overflow: hidden; 
+}
+
+.item__img {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  transition: transform 0.3s ease; /* Плавность перехода при масштабировании */
+}
+
+.item_img-wrapper:hover .item__img {
+  transform: scale(1.05); /* Масштабирование при наведении */
+}

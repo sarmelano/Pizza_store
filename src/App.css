@@ -10,7 +10,7 @@
 
 .App {
   font-size: 16px;
-  height: 100dvh;
+  min-height: 100dvh;
   background-color: #f1f5f9;
 }
 /*Header*/

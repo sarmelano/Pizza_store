@@ -3,7 +3,8 @@ import './App.css';
 import UserContext from './context/UserContext';
 import Header from './components/Header';
 import Main from './pages/LoginPage/Main';
-
+import Menu from './pages/MenuPage/Menu';
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -12,9 +13,11 @@ function App() {
     <UserContext.Provider value={{ user, setUser }}>
       <div className="App">
         <Header />
-        <Main />
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/menu" element={<Menu />} />
+        </Routes>
       </div>
-      {user && console.log(user)} {/* вместо компонента */}
     </UserContext.Provider>
   );
 }
