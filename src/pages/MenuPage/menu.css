@@ -1,19 +1,29 @@
-
 .menu_items {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 2%;
-  row-gap: 2%;
   list-style: none;
   margin-top: 5dvh;
 }
 
+.menu_item {
+  background-color: rgba(255, 228, 196, 0.32);
+  margin-bottom: 4dvh;
+  border-radius: 20px;
+}
+
 .item_img-wrapper {
-  display: block; 
-  max-width: 100%; 
-  padding: 15px; 
-  overflow: hidden; 
+position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* display: block; */
+  max-width: 100%;
+  padding: 15px;
+  overflow: hidden;
 }
 
 .item__img {
@@ -22,9 +32,63 @@
   width: 100%;
   height: auto;
   border-radius: 20px;
-  transition: transform 0.3s ease; /* Плавность перехода при масштабировании */
+  transition: transform 0.3s ease;
+ 
+  transition: opacity 0.3s ease;
+}
+
+.item__img:hover {
+  opacity: 0.5;
 }
 
 .item_img-wrapper:hover .item__img {
-  transform: scale(1.05); /* Масштабирование при наведении */
+  transform: scale(1.05);
+}
+
+
+  
+  .item__img-desc {
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 80%; /* Установите ширину, которая подходит для вашего дизайна */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: white;
+    padding: 10px;
+  }
+  
+
+
+.item_img-wrapper:hover .item__img-desc {
+  opacity: 1;
+}
+
+.item_desc-wrapper {
+  padding: 0 4%;
+  margin-bottom: 2dvh;
+}
+
+.item_price {
+  font-weight: 600;
+  margin: 1dvh 0;
+  text-align: right;
+}
+
+.item_btn {
+  display: block;
+  cursor: pointer;
+  width: 50%;
+  border-radius: 10px;
+  border: 1px solid black;
+  margin: 0 auto;
+  padding: 3% 1.5%;
+  transition: .2s ease;
+}
+
+.item_btn:hover {
+  background-color: rgba(234, 178, 8, 0.626);
 }
