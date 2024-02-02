@@ -1,4 +1,6 @@
-*, *::after, *::before {
+*,
+*::after,
+*::before {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -13,6 +15,7 @@
   min-height: 100dvh;
   background-color: #f1f5f9;
 }
+
 /*Header*/
 .App-header {
   display: flex;
@@ -24,6 +27,30 @@
   font-weight: bold;
 }
 
+.header_userInfo {
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+}
+
+.cart-icon-container {
+  cursor: pointer;
+  position: relative;
+}
+
+.item-count {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: green;
+  color: white;
+  border-radius: 50%;
+  padding: 0 5px;
+  font-size: 12px;
+  font-weight: bold;
+  transform: translate(50%, -50%);
+}
+
 #query {
   width: 100%;
   padding: 6%;
@@ -31,6 +58,7 @@
   border: none;
   background-color: #fef08a;
 }
+
 /*Header*/
 
 .App-main {
@@ -57,7 +85,7 @@
 }
 
 .desc {
-  font-weight:bolder;
+  font-weight: bolder;
   color: rgb(49, 48, 48);
 }
 

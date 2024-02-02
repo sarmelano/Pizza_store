@@ -1,14 +1,33 @@
 import React, { useContext } from 'react'
 import UserContext from '../context/UserContext'
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { FaShoppingCart } from 'react-icons/fa'; 
 
 export default function Header() {
-  const { user } = useContext(UserContext)
+  const navigate = useNavigate();
+  const { user } = useContext(UserContext);
+  const cartItems = useSelector((state) => state.cart.items);
+
+  const itemCount = cartItems.reduce((total, item) => total + item.qty, 0);
+
+  const handleNavigateToCart = () => {
+    navigate('/cart');
+  };
 
   return (
     <header className="App-header">
       <p>PIZZA DAY</p>
       <p><input type="text" id="query" placeholder="Search..." /></p>
-      {user && <p>{ user }</p>}
+
+      <div className="header_userInfo">
+        {user && <p>{user}</p>}
+        <div className="cart-icon-container" onClick={handleNavigateToCart}>
+          <FaShoppingCart className="cart-icon" size="24" color="gray" />
+          {itemCount > 0 &&
+            <span className="item-count">{itemCount}</span>} 
+        </div>
+      </div>
     </header>
-  )
+  );
 };

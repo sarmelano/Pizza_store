@@ -10,7 +10,7 @@ const Login = () => {
   const handleLogin = () => {
     setUser(name);
 /*     setName('');
- */    navigate(`/menu`)
+ */    navigate(`/menu`)  //navigate deeper in server
   };
 
   return (

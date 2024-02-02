@@ -73,9 +73,10 @@ position: relative;
 }
 
 .item_price {
-  font-weight: 600;
+  font-weight: 700;
   margin: 1dvh 0;
   text-align: right;
+  color: rgb(54, 195, 54);
 }
 
 .item_btn {
