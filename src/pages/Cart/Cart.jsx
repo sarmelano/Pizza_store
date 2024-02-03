@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { decrementQty, incrementQty, removeFromCart } from '../../redux/slices/CartSlice';
+import { decrementQty, incrementQty, removeFromCart, resetCart } from '../../redux/slices/CartSlice';
+import UserContext from '../../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
+  const { user } = useContext(UserContext)
   const dispatch = useDispatch();
   const { items } = useSelector(state => state.cart);
+
+  const navigate = useNavigate();
+  const handleGoback = () => {
+    navigate('/menu')
+  }
 
   const handleIncrementCartQty = (id) => {
     dispatch(incrementQty(id))
@@ -18,28 +26,47 @@ const Cart = () => {
     dispatch(removeFromCart(id))
   };
 
+  const handleResetCart = () => {
+    dispatch(resetCart())
+  };
+
 
   return (
-    <div>
+    <div className='cart-wrapper'>
+      <div className="cart">
 
-      <ul>
-        {items.map(item =>
-          <li key={item.id}>
-            <p>{item.name} {item.qty}</p>
-            <div>
-              <button onClick={() => handleIncrementCartQty(item.id)}>+</button>
-              <p>{item.qty}</p>
-              <button onClick={() => handleDecrementCartQty(item.id)}>-</button>
-            </div>
-            <button onClick={() => handleRemoveFromCart(item.id)}>Remove item</button>
-          </li>
-        )}
-      </ul>
+        <button className='goBack' onClick={handleGoback}>&#x2190; Back to Menu</button>
 
+        <div className='cart-holder'>{user && <h3>Your cart, {user}</h3>}</div>
+
+        <ul className='cart-items'>
+          {items.map(item =>
+            <li key={item.id} className='cart-item'>
+              <p className='item-name'>{item.qty}&times; {item.name} </p>
+              <div className="controller_panel">
+
+                <div className='cart-controller'>
+                  <button onClick={() => handleIncrementCartQty(item.id)} className='cart-btn controller_btns'>+</button>
+                  <p>{item.qty}</p>
+                  <button onClick={() => handleDecrementCartQty(item.id)} className='cart-btn controller_btns'>-</button>
+                </div>
+                <button onClick={() => handleRemoveFromCart(item.id)} className='cart-btn delete_btn'>DELETE</button>
+
+              </div>
+            </li>
+          )}
+
+          <div className="cart-order_btns">
+            <button className='cart-btn order_btn'>ORDER PIZZAS</button>
+            <button className='cart-btn order_btn clear_btn' onClick={handleResetCart}>CLEAR CART</button>
+          </div>
+
+        </ul>
+
+      </div>
     </div>
   )
 }
 
 export default Cart
-
 /* anonym func cause of send props */
