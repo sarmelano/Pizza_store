@@ -138,6 +138,34 @@
   margin-bottom: 2dvh;
 }
 
+.splash-cart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 5dvh;
+
+}
+
+.splash-cart_empty {
+  min-width: 42dvw;
+
+  
+}
+
+.splash-cart_text {
+  padding-top: 5dvh;
+  text-align: center;
+  font-size: 2rem;
+  color: #bbbec3a0;
+}
+
+.pizza_icon {
+  width: 20dvh;
+  height: auto;
+  color: #bbbec3a0;
+}
+
 .cart-items {
   display: flex;
   padding: 0;
@@ -156,6 +184,8 @@
     padding: 3dvh 0;
     border-bottom: 1px solid rgb(231,233,237);
 }
+
+
 
 .item-name {
   font-family: 'Marcellus', serif;

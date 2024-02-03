@@ -17,13 +17,13 @@ function App() {
     <UserContext.Provider value={{ user, setUser }}>
 
       <div className="App">
-        {showNavigation && (
+        {/* {showNavigation && (
           <nav>
             <NavLink to="/">Home</NavLink>
             <NavLink to="/menu">Menu</NavLink>
             <NavLink to="/cart">Cart</NavLink>
           </nav>
-        )}
+        )} */}
 
         <Header />
 
