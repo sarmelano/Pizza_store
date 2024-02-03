@@ -15,9 +15,13 @@ export default function Header() {
     navigate('/cart');
   };
 
+  const handleNavigateToMain = () => {
+    navigate('/')
+  }
+
   return (
     <header className="App-header">
-      <p>PIZZA DAY</p>
+      <button className='header_logo' onClick={handleNavigateToMain}>PIZZA DAY</button>
       <p><input type="text" id="query" placeholder="Search..." /></p>
 
       <div className="header_userInfo">

@@ -27,6 +27,15 @@
   font-weight: bold;
 }
 
+.header_logo {
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  background-color: transparent;
+}
+
 .header_userInfo {
   display: flex;
   align-items: center;
