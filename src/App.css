@@ -68,6 +68,10 @@
   background-color: #fef08a;
 }
 
+#query:focus {
+  outline: 1px solid #fef08a;
+}
+
 /*Header*/
 
 .App-main {
