@@ -63,6 +63,7 @@ const Cart = () => {
               <li key={item.id} className='cart-item'>
                 <p className='item-name'>{item.qty}&times; {item.name} </p>
                 <div className="controller_panel">
+                <p className='item-price'>{(item.unitPrice * item.qty).toFixed(2)} $</p>
 
                   <div className='cart-controller'>
                     <button onClick={() => handleIncrementCartQty(item.id)} className='cart-btn controller_btns'>+</button>

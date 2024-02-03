@@ -161,7 +161,7 @@
 }
 
 .splash-cart_empty {
-  min-width: 42dvw;
+  min-width: 45dvw;
 
   
 }
@@ -190,7 +190,7 @@
 
 .cart-item {
   
-  width: 42vw;
+  width: 45vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -206,14 +206,15 @@
 
 .controller_panel {
   display: flex;
-  width: 15vw;
+  width: 23vw;
   justify-content: space-between;
+  align-items: center;
 }
 
 .cart-controller {
   
   display: flex;
-  width: 50%;
+  width: 30%;
   justify-content: space-between;
     align-items: center;
 }
@@ -225,6 +226,11 @@
     border-radius: 10px;
     background-color: #eab308;
     border: none;
+    transition: .2s ease;
+}
+
+.cart-btn:hover {
+  background-color: #eab2087e;
 }
 
 .controller_btns {
@@ -250,3 +256,8 @@
   border: 1px solid rgb(214,212,210);
   color: rgb(100,122,154);
 }
+
+.clear_btn:hover {
+  background-color: rgba(255, 0, 0, 0.038);
+}
+

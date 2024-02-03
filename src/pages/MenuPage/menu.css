@@ -72,7 +72,12 @@ position: relative;
   margin-bottom: 2dvh;
 }
 
+.item_name {
+  color: #eab308;
+}
+
 .item_price {
+  cursor: default;
   font-weight: 700;
   margin: 1dvh 0;
   text-align: right;
@@ -93,3 +98,28 @@ position: relative;
 .item_btn:hover {
   background-color: rgba(234, 178, 8, 0.626);
 }
+
+.item_btn:disabled {
+  background-color: #CCCCCC;
+  color: #666666;
+}
+
+.sold-out {
+  color: #666666;
+}
+
+.menu_item.sold-out .item__img {
+  filter: grayscale(100%);
+}
+
+
+@keyframes button-click {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.button-clicked {
+  animation: button-click 0.5s ease;
+}
+

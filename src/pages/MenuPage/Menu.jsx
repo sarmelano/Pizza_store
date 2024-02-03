@@ -1,53 +1,21 @@
-import { useState, useEffect } from 'react';
 import { PIZZA_API } from '../../constants/data';
 import MenuItem from './MenuItem';
+import useFetch from '../../hooks/useFetch';
+import Loading from '../../components/feedback/Loading';
+import Error from '../../components/feedback/Error';
 
 function Menu() {
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    let isMounted = true;
-
-    const getData = async () => {
-      try {
-        const response = await fetch(`${PIZZA_API}/menu`);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const result = await response.json();
-        if (isMounted) {
-          setData(result.data);
-        }
-      } catch (e) {
-        if (isMounted) {
-          setError(e);
-        }
-      } finally {
-        if (isMounted) {
-          setIsLoading(false);
-        }
-      }
-    };
-
-    getData();
-
-    // Clean effect
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+  const { data, error, isLoading } = useFetch(`${PIZZA_API}/menu`);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading/>;
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <Error message={error.message}/>
   }
 
-  // render if there is no error and fetch ok
+//render if there is no error and fetch is ok
   return (
     <ul className='menu_items'>
       {data && data.map(item =>
