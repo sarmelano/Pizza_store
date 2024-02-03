@@ -5,31 +5,61 @@ import UserContext from '../../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPizzaSlice } from '@fortawesome/free-solid-svg-icons';
+import DeleteConfirmaModal from './DeleteConfirmModal';
+import './cart.scss';
+import CartItem from './CartItem';
 
 const Cart = () => {
   const { user } = useContext(UserContext);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const { items } = useSelector(state => state.cart);
   const [emptyCart, setEmptyCart] = useState(items.length === 0);
-  const navigate = useNavigate();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState(null);
+
+  const handleGoback = () => navigate('/menu');
+  const totalPrice = items.reduce((total, item) => total + item.unitPrice * item.qty, 0).toFixed(2);
 
   useEffect(() => {
     setEmptyCart(items.length === 0);
   }, [items]);
 
-  const handleGoback = () => navigate('/menu');
   const handleIncrementCartQty = id => dispatch(incrementQty(id));
   const handleDecrementCartQty = id => dispatch(decrementQty(id));
-  const handleRemoveFromCart = id => dispatch(removeFromCart(id));
+  const handleRemoveFromCart = id => openModal(id);
+  const openModal = (id) => {
+    setItemToDelete(id);
+    setModalOpen(true);
+  };
+
+  const handleDelete = () => {
+    if (itemToDelete) {
+      dispatch(removeFromCart(itemToDelete));
+      setModalOpen(false);
+    }
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  const handleMakeOrder = () => console.log("Ordering pizzas:", items);
+
   const handleResetCart = () => {
     dispatch(resetCart());
     setEmptyCart(true);
   };
-  const totalPrice = items.reduce((total, item) => total + item.unitPrice * item.qty, 0).toFixed(2);
-  const handleMakeOrder = () => console.log("Ordering pizzas:", items);
 
   return (
     <div className='cart-wrapper'>
+      <DeleteConfirmaModal
+        isOpen={modalOpen}
+        onConfirm={handleDelete}
+        onCancel={closeModal}
+      />
+
       <div className="cart">
         <button className='goBack' onClick={handleGoback}>&#x2190; Back to Menu</button>
         {user && <div className='cart-holder'><h3>Your cart, {user}</h3></div>}
@@ -44,23 +74,15 @@ const Cart = () => {
         ) : (
           <>
             <ul className='cart-items'>
-              {items.map(item => {
-                const itemTotalPrice = (item.unitPrice * item.qty).toFixed(2);
-                return (
-                  <li key={item.id} className='cart-item'>
-                    <p className='item-name'>{item.qty}&times; {item.name}</p>
-                    <div className="controller_panel">
-                      <p className='item-price'>${itemTotalPrice}</p>
-                      <div className='cart-controller'>
-                        <button onClick={() => handleIncrementCartQty(item.id)} className='cart-btn controller_btns'>+</button>
-                        <p>{item.qty}</p>
-                        <button onClick={() => handleDecrementCartQty(item.id)} className='cart-btn controller_btns'>-</button>
-                      </div>
-                      <button onClick={() => handleRemoveFromCart(item.id)} className='cart-btn delete_btn'>DELETE</button>
-                    </div>
-                  </li>
-                );
-              })}
+              {items.map(item => (
+                <CartItem
+                  key={item.id}
+                  item={item}
+                  ToIncrement={handleIncrementCartQty}//обозвать  ={передать}
+                  ToDecrement={handleDecrementCartQty}
+                  ToRemove={handleRemoveFromCart}
+                />
+              ))}
             </ul>
             <div className="order-pannel">
               <div>

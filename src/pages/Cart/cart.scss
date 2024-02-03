@@ -1,0 +1,51 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  &-wrapper_btns {
+    display: flex;
+    justify-content: flex-end;
+    gap: 30px;
+    margin-top: 4dvh;
+  }
+
+  &_btn {
+    cursor: pointer;
+    padding: 5px 28px;
+    border-radius: 12px;
+    background-color: #eab308;
+    border: 1px solid #eab308;
+
+    &:hover {
+      background-color: transparent;
+      color: red;
+
+      &:last-child {
+        border-color: rgba(0, 128, 0, 0.607);
+        color: rgba(0, 128, 0, 0.607);
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
