@@ -241,9 +241,7 @@
   padding: 1.5dvh 3dvh;
 }
 
-.cart-order_btns {
-  margin-top: 3dvh;
-}
+
 
 
 .order_btn {
@@ -261,3 +259,10 @@
   background-color: rgba(255, 0, 0, 0.038);
 }
 
+.order-pannel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5dvh;
+
+}
