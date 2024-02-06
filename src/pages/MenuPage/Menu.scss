@@ -1,0 +1,124 @@
+@import '../../components/global/vars.scss';
+
+.menu {
+  @include justify-center;
+  flex-wrap: wrap;
+  gap: 2%;
+  list-style: none;
+  margin-top: 5dvh;
+
+  &-item {
+    background-color: var(--gr-bc-c);
+    margin-bottom: 4dvh;
+    border-radius: var(--border-radius-l);
+  }
+}
+
+.item-img__wrapper {
+  position: relative;
+  @include flex-center;
+  max-width: 100%;
+  padding: 15px;
+  overflow: hidden;
+}
+
+.item-img__wrapper:hover .item-img {
+  transform: scale(1.05);
+}
+
+.item-img__wrapper:hover .item-img__desc {
+  opacity: 1;
+}
+
+.item-img {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--border-radius-l);
+  transition: transform 0.3s ease;
+  transition: opacity 0.3s ease;
+
+  &__desc {
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 80%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: var(--white-c);
+    padding: 10px;
+  }
+
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+.item {
+  &-desc__wrapper {
+    padding: 0 4%;
+    margin-bottom: 2dvh;
+  }
+
+  &_name {
+    color: var(--main-c);
+  }
+
+  &_price {
+    cursor: default;
+    font-weight: 700;
+    margin: 1dvh 0;
+    text-align: right;
+    color: rgb(54, 195, 54);
+  }
+
+  &_btn {
+    display: block;
+    cursor: pointer;
+    width: 50%;
+    border-radius: var(--border-radius-m);
+    border: 1px solid black;
+    margin: 0 auto;
+    padding: 3% 1.5%;
+    transition: .2s ease;
+
+    &:hover {
+      background-color: rgba(234, 178, 8, 0.626);
+    }
+
+    &:disabled {
+      background-color: #CCCCCC;
+      color: #666666;
+    }
+  }
+}
+
+.sold-out {
+  color: #666666;
+}
+
+.menu-item.sold-out .item-img {
+  filter: grayscale(100%);
+}
+
+@keyframes button-click {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.button-clicked {
+  animation: button-click 0.5s ease;
+}

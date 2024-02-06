@@ -1,0 +1,37 @@
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin justify-center {
+  display: flex;
+  justify-content: center;
+}
+
+:root {
+  --main-c: #eab308;
+  --body-c: #f1f5f9;
+
+  --secondary-c: #fef08a;
+  --flash-c: #eab526;
+
+  --login-btn-c: #ffc000;
+  --btns-h-c: #eab2087e;
+
+  --desc-c: rgb(49, 48, 48);
+  --navigate-c: blue;
+
+  --white-c: #FFFFFF;
+  --gr-c: #bbbec3a0;
+  --gr-bc-c: rgba(255, 228, 196, 0.32);;
+  --green-c: green;
+  --green-h-c: rgba(0, 128, 0, 0.607);
+
+  --padding-section: 185px;
+
+  --border-radius-l: 20px;
+  --border-radius-m: 12px;
+  --border-radius-s: 8px;
+  --border-radius-xl: 50%;
+}

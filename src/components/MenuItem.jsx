@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../redux/slices/CartSlice';
-import '../pages/MenuPage/Menu.css'
+import '../pages/MenuPage/Menu.scss'
 
 export default function MenuItem({ item }) {
   const { name, unitPrice, imageUrl, ingredients, soldOut } = item;
@@ -19,12 +19,12 @@ export default function MenuItem({ item }) {
   };
 
   return (
-    <li className={`menu_item ${soldOut ? 'sold-out' : ''}`}>
-      <div className='item_img-wrapper'>
-        <img className='item__img' src={imageUrl} alt={name} />
-        <p className='item__img-desc'>{soldOut ? 'Sold Out' : ingredients.join(', ')}</p>
+    <li className={`menu-item ${soldOut ? 'sold-out' : ''}`}>
+      <div className='item-img__wrapper'>
+        <img className='item-img' src={imageUrl} alt={name} />
+        <p className='item-img__desc'>{soldOut ? 'Sold Out' : ingredients.join(', ')}</p>
       </div>
-      <div className='item_desc-wrapper'>
+      <div className='item-desc__wrapper'>
         <p className={`item_name ${soldOut ? 'sold-out' : ''}`}>{name}</p>
         <p className={`item_price ${soldOut ? 'sold-out' : ''}`}>{unitPrice} $</p>
         <button

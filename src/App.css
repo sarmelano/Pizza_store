@@ -116,7 +116,6 @@
   padding: 4%;
   border-radius: 8px;
   border: none;
-
   background-color: #ffc000;
   cursor: pointer;
   font-size: 1.1rem;
@@ -136,7 +135,6 @@
   display: flex;
   align-content: center;
   justify-content: center;
-
 }
 
 .goBack {
@@ -146,7 +144,7 @@
   margin-bottom: 5dvh;
 }
 
-.cart-holder{
+.cart-holder {
   font-family: 'Marcellus', serif;
   margin-bottom: 2dvh;
 }
@@ -157,13 +155,10 @@
   justify-content: center;
   align-items: center;
   padding-top: 5dvh;
-
 }
 
 .splash-cart_empty {
   min-width: 45dvw;
-
-  
 }
 
 .splash-cart_text {
@@ -189,16 +184,14 @@
 }
 
 .cart-item {
-  
+
   width: 45vw;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 3dvh 0;
-    border-bottom: 1px solid rgb(231,233,237);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3dvh 0;
+  border-bottom: 1px solid rgb(231, 233, 237);
 }
-
-
 
 .item-name {
   font-family: 'Marcellus', serif;
@@ -212,21 +205,20 @@
 }
 
 .cart-controller {
-  
   display: flex;
   width: 30%;
   justify-content: space-between;
-    align-items: center;
+  align-items: center;
 }
 
 .cart-btn {
   font-family: 'Marcellus', serif;
-    font-weight: 600;
-    cursor: pointer;
-    border-radius: 10px;
-    background-color: #eab308;
-    border: none;
-    transition: .2s ease;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 10px;
+  background-color: #eab308;
+  border: none;
+  transition: .2s ease;
 }
 
 .cart-btn:hover {
@@ -241,9 +233,6 @@
   padding: 1.5dvh 3dvh;
 }
 
-
-
-
 .order_btn {
   padding: 2dvh 4dvh;
 }
@@ -251,8 +240,8 @@
 .clear_btn {
   margin-left: 1vw;
   background-color: transparent;
-  border: 1px solid rgb(214,212,210);
-  color: rgb(100,122,154);
+  border: 1px solid rgb(214, 212, 210);
+  color: rgb(100, 122, 154);
 }
 
 .clear_btn:hover {
@@ -264,5 +253,4 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 5dvh;
-
 }
