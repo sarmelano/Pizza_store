@@ -1,5 +1,5 @@
 import { PIZZA_API } from '../../constants/data';
-import MenuItem from './MenuItem';
+import MenuItem from '../../components/MenuItem';
 import useFetch from '../../hooks/useFetch';
 import Loading from '../../components/feedback/Loading';
 import Error from '../../components/feedback/Error';

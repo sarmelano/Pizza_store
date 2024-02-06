@@ -5,9 +5,9 @@ import UserContext from '../../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPizzaSlice } from '@fortawesome/free-solid-svg-icons';
-import DeleteConfirmaModal from './DeleteConfirmModal';
-import './cart.scss';
-import CartItem from './CartItem';
+import DeleteConfirmaModal from '../../components/DeleteConfirmModal';
+import CartItem from '../../components/CartItem';
+import './Cart.scss';
 
 const Cart = () => {
   const { user } = useContext(UserContext);

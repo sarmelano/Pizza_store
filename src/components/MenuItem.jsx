@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import './menu.css'
 import { useDispatch } from 'react-redux';
-import { addToCart } from '../../redux/slices/CartSlice';
+import { addToCart } from '../redux/slices/CartSlice';
+import '../pages/MenuPage/Menu.css'
 
 export default function MenuItem({ item }) {
   const { name, unitPrice, imageUrl, ingredients, soldOut } = item;
