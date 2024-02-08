@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import UserContext from '../context/UserContext'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { FaShoppingCart } from 'react-icons/fa'; 
+import { FaShoppingCart } from 'react-icons/fa';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ export default function Header() {
         <div className="cart-icon-container" onClick={handleNavigateToCart}>
           <FaShoppingCart className="cart-icon" size="24" color="gray" />
           {itemCount > 0 &&
-            <span className="item-count">{itemCount}</span>} 
+            <span className="item-count">{itemCount}</span>}
         </div>
       </div>
     </header>

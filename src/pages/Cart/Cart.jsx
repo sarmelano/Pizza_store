@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useMemo, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { decrementQty, incrementQty, removeFromCart, resetCart } from '../../redux/slices/CartSlice';
 import UserContext from '../../context/UserContext';
@@ -13,44 +13,40 @@ const Cart = () => {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const { items } = useSelector(state => state.cart);
-  const [emptyCart, setEmptyCart] = useState(items.length === 0);
+
+  const emptyCart = items.length === 0;
   const [modalOpen, setModalOpen] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
 
-  const handleGoback = () => navigate('/menu');
-  const totalPrice = items.reduce((total, item) => total + item.unitPrice * item.qty, 0).toFixed(2);
+  const handleGoback = useCallback(() => navigate('/menu'), [navigate]);
+  const totalPrice = useMemo(() => items.reduce((total, item) => total + item.unitPrice * item.qty, 0).toFixed(2), [items]);
 
-  useEffect(() => {
-    setEmptyCart(items.length === 0);
-  }, [items]);
-
-  const handleIncrementCartQty = id => dispatch(incrementQty(id));
-  const handleDecrementCartQty = id => dispatch(decrementQty(id));
-  const handleRemoveFromCart = id => openModal(id);
-  const openModal = (id) => {
+  const handleIncrementCartQty = useCallback((id) => dispatch(incrementQty(id)), [dispatch]); //useCallback to wrap the event handlers to prevent unnecessary re-renders.
+  const handleDecrementCartQty = useCallback((id) => dispatch(decrementQty(id)), [dispatch]);
+  const handleRemoveFromCart = useCallback((id) => {
     setItemToDelete(id);
     setModalOpen(true);
-  };
+  }, []);
 
-  const handleDelete = () => {
+  const handleDelete = useCallback(() => {
     if (itemToDelete) {
       dispatch(removeFromCart(itemToDelete));
       setModalOpen(false);
     }
-  };
+  }, [dispatch, itemToDelete]);
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setModalOpen(false);
-  };
+  }, []);
 
-  const handleMakeOrder = () => console.log("Ordering pizzas:", items);
+  const handleMakeOrder = useCallback(() => {
+    console.log("Ordering pizzas:", items);
+  }, [items]);
 
-  const handleResetCart = () => {
+  const handleResetCart = useCallback(() => {
     dispatch(resetCart());
-    setEmptyCart(true);
-  };
+  }, [dispatch]);
 
   return (
     <div className='cart-wrapper'>
@@ -78,7 +74,7 @@ const Cart = () => {
                 <CartItem
                   key={item.id}
                   item={item}
-                  ToIncrement={handleIncrementCartQty}//обозвать  ={передать}
+                  ToIncrement={handleIncrementCartQty}
                   ToDecrement={handleDecrementCartQty}
                   ToRemove={handleRemoveFromCart}
                 />

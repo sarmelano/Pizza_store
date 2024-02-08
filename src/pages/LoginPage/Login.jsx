@@ -10,7 +10,7 @@ export default function Main() {
 
   const handleLogin = () => {
     setUser(name);
-/*     setName('');*/   
+    /*     setName('');*/
     navigate(`/menu`)  //navigate deeper in server
   };
 

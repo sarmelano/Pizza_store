@@ -15,7 +15,7 @@ const CartSlice = createSlice({
       if (found) {
         found.qty += 1;
       } else {
-        state.items.push({...payload, qty: 1});
+        state.items.push({ ...payload, qty: 1 });
       }
     },
 
@@ -25,7 +25,7 @@ const CartSlice = createSlice({
         item.qty += 1;
       }
     },
-    
+
     decrementQty: (state, { payload }) => {
       const item = state.items.find(item => item.id === payload);
       if (item && item.qty > 1) {
@@ -33,7 +33,7 @@ const CartSlice = createSlice({
       } else {
         state.items = state.items.filter(item => item.id !== payload);
       }
-    },    
+    },
 
     removeFromCart: (state, { payload }) => {
       state.items = state.items.filter(item => item.id !== payload);

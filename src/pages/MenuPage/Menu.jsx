@@ -9,12 +9,13 @@ function Menu() {
   const dispatch = useDispatch();
   const { menu, status, error } = useSelector((state) => state.menu);
 
-  useEffect(() => 
-  { if (status === 'idle') dispatch(fetchMenu()); }, [dispatch, status]);
-  if (status === 'loading') {return <Loading/>;}
-  if (status === 'failed') {return <Error message={error}/>;}
-
-  console.log(menu)
+  useEffect(() => { if (status === 'idle') dispatch(fetchMenu()); }, [dispatch, status]);
+  if (status === 'loading') {
+    return <Loading />;
+  }
+  if (status === 'failed') {
+    return <Error message={error} />;
+  }
 
   return (
     <ul className='menu'>
