@@ -1,7 +1,6 @@
-import React, { useContext, useMemo, useCallback, useState } from 'react';
+import React, { useMemo, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { decrementQty, incrementQty, removeFromCart, resetCart } from '../../redux/slices/CartSlice';
-import UserContext from '../../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPizzaSlice } from '@fortawesome/free-solid-svg-icons';
@@ -10,7 +9,7 @@ import CartItem from '../../components/CartItem';
 import './Cart.scss';
 
 const Cart = () => {
-  const { user } = useContext(UserContext);
+  const userName = useSelector((state)=> state.user.name);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { items } = useSelector(state => state.cart);
@@ -41,8 +40,8 @@ const Cart = () => {
   }, []);
 
   const handleMakeOrder = useCallback(() => {
-    console.log("Ordering pizzas:", items);
-  }, [items]);
+    navigate('/order/new');
+  }, [navigate]);
 
   const handleResetCart = useCallback(() => {
     dispatch(resetCart());
@@ -58,7 +57,7 @@ const Cart = () => {
 
       <div className="cart">
         <button className='goBack' onClick={handleGoback}>&#x2190; Back to Menu</button>
-        {user && <div className='cart-holder'><h3>Your cart, {user}</h3></div>}
+        {userName && <div className='cart-holder'><h3>Your cart, {userName}</h3></div>}
 
         {emptyCart ? (
           <div className='splash-cart'>

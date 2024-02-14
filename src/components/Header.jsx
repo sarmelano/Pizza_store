@@ -1,12 +1,11 @@
-import React, { useContext } from 'react'
-import UserContext from '../context/UserContext'
+import React from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
 
 export default function Header() {
   const navigate = useNavigate();
-  const { user } = useContext(UserContext);
+  const userName = useSelector((state)=> state.user.name);
   const cartItems = useSelector((state) => state.cart.items);
 
   const itemCount = cartItems.reduce((total, item) => total + item.qty, 0);
@@ -25,7 +24,7 @@ export default function Header() {
       <p><input type="text" id="query" placeholder="Search..." /></p>
 
       <div className="header_userInfo">
-        {user && <p>{user}</p>}
+        {userName && <p>{userName}</p>}
         <div className="cart-icon-container" onClick={handleNavigateToCart}>
           <FaShoppingCart className="cart-icon" size="24" color="gray" />
           {itemCount > 0 &&

@@ -1,15 +1,17 @@
-import React, { useState, useContext } from 'react';
-import UserContext from '../../context/UserContext';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setName as setUserName } from '../../redux/slices/UserSlice';
 import { useNavigate } from 'react-router-dom';
 
-export default function Main() {
 
+export default function Main() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
-  const { setUser } = useContext(UserContext);
+  
 
   const handleLogin = () => {
-    setUser(name);
+    dispatch(setUserName(name));
     /*     setName('');*/
     navigate(`/menu`)  //navigate deeper in server
   };
