@@ -1,11 +1,11 @@
-import { useForm, Controller } from 'react-hook-form';
+import { useCallback } from 'react';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useDispatch, useSelector } from 'react-redux';
 import { validationSchema } from './validationSchema';
 import CustomTextField from './CustomTextField';
-import { useDispatch, useSelector } from 'react-redux';
-import './OrderForm.scss'
 import { togglePriority } from '../../redux/slices/CartSlice';
-import { useCallback } from 'react';
+import './OrderForm.scss'
 
 const OrderForm = () => {
   const userName = useSelector((state) => state.user.name);

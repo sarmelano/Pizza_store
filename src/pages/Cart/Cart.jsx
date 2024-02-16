@@ -1,10 +1,10 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { decrementQty, incrementQty, removeFromCart, resetCart } from '../../redux/slices/CartSlice';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPizzaSlice } from '@fortawesome/free-solid-svg-icons';
-import DeleteConfirmaModal from '../../components/DeleteConfirmModal';
+import DeleteConfirmModal from '../../components/DeleteConfirmModal';
 import CartItem from '../../components/CartItem';
 import './Cart.scss';
 
@@ -13,8 +13,8 @@ const Cart = () => {
   const dispatch = useDispatch();
   const userName = useSelector((state)=> state.user.name);
   const { items, totalPrice } = useSelector(state => state.cart);
-
   const emptyCart = items.length === 0;
+
   const [modalOpen, setModalOpen] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
 
@@ -35,19 +35,12 @@ const Cart = () => {
     setModalOpen(false);
   }, []);
 
-  const handleMakeOrder = useCallback(() => {
-    navigate('/order/new');
-  }, [navigate]);
-
-  const handleResetCart = useCallback(() => {
-    dispatch(resetCart());
-  }, [dispatch]);
-
- 
+  const handleMakeOrder = useCallback(() => navigate('/order/new'), [navigate]);
+  const handleResetCart = useCallback(() => dispatch(resetCart()), [dispatch]);
 
   return (
     <div className='cart-wrapper'>
-      <DeleteConfirmaModal
+      <DeleteConfirmModal
         isOpen={modalOpen}
         onConfirm={handleDelete}
         onCancel={closeModal}
