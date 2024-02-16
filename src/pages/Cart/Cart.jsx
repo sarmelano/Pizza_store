@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { decrementQty, incrementQty, removeFromCart, resetCart, updateTotalPrice } from '../../redux/slices/CartSlice';
+import { decrementQty, incrementQty, removeFromCart, resetCart } from '../../redux/slices/CartSlice';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPizzaSlice } from '@fortawesome/free-solid-svg-icons';
@@ -9,9 +9,9 @@ import CartItem from '../../components/CartItem';
 import './Cart.scss';
 
 const Cart = () => {
-  const userName = useSelector((state)=> state.user.name);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const userName = useSelector((state)=> state.user.name);
   const { items, totalPrice } = useSelector(state => state.cart);
 
   const emptyCart = items.length === 0;
@@ -20,14 +20,13 @@ const Cart = () => {
 
   const handleGoback = useCallback(() => navigate('/menu'), [navigate]);
 
-  const handleIncrementCartQty = useCallback((id) => {dispatch(incrementQty(id)); dispatch(updateTotalPrice());}, [dispatch]); //useCallback to wrap the event handlers to prevent unnecessary re-renders.
-  const handleDecrementCartQty = useCallback((id) => {dispatch(decrementQty(id)); dispatch(updateTotalPrice());}, [dispatch]);
+  const handleIncrementCartQty = useCallback((id) => {dispatch(incrementQty(id));}, [dispatch]);
+  const handleDecrementCartQty = useCallback((id) => {dispatch(decrementQty(id));}, [dispatch]);
   const handleRemoveFromCart = useCallback((id) => {setItemToDelete(id); setModalOpen(true);}, []);
 
   const handleDelete = useCallback(() => {
     if (itemToDelete) {
       dispatch(removeFromCart(itemToDelete));
-      dispatch(updateTotalPrice());
       setModalOpen(false);
     }
   }, [dispatch, itemToDelete]);
@@ -44,9 +43,7 @@ const Cart = () => {
     dispatch(resetCart());
   }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(updateTotalPrice()); 
-  }, [dispatch, items]);
+ 
 
   return (
     <div className='cart-wrapper'>
@@ -74,7 +71,7 @@ const Cart = () => {
                 <CartItem
                   key={item.id}
                   item={item}
-                  ToIncrement={handleIncrementCartQty}
+                  ToIncrement={handleIncrementCartQty} 
                   ToDecrement={handleDecrementCartQty}
                   ToRemove={handleRemoveFromCart}
                 />

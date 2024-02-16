@@ -5,10 +5,11 @@ import CustomTextField from './CustomTextField';
 import { useDispatch, useSelector } from 'react-redux';
 import './OrderForm.scss'
 import { togglePriority } from '../../redux/slices/CartSlice';
+import { useCallback } from 'react';
 
 const OrderForm = () => {
   const userName = useSelector((state) => state.user.name);
-  const { totalPrice } = useSelector(state => state.cart);
+  const { totalPrice, priority } = useSelector(state => state.cart);
   const dispatch = useDispatch();
 
   const { control, handleSubmit, formState: { errors }, reset } = useForm({
@@ -17,7 +18,6 @@ const OrderForm = () => {
       email: '',
       cardNumber: '',
       address: '',
-      priority: false,
     },
     resolver: yupResolver(validationSchema),
     mode: 'onBlur'
@@ -28,9 +28,9 @@ const OrderForm = () => {
     reset();
   }
 
-  const handlePriorityChange = (e) => {
+  const handlePriorityChange = useCallback(() => {
     dispatch(togglePriority());
-  }
+  }, [dispatch]);
   
   return (
     <div className='order-form_wrapper'>
@@ -42,13 +42,7 @@ const OrderForm = () => {
         <CustomTextField control={control} name="address" label="Address" errors={errors} />
 
         <div className='order-form_checkbox-wrapper'>
-          <Controller
-            name="priority"
-            control={control}
-            render={({ field }) => (
-              <input type="checkbox" id="priority" {...field} onChange={handlePriorityChange} />
-            )}
-          />
+          <input type="checkbox" id="priority" checked={priority} onChange={handlePriorityChange} />
           <label htmlFor='priority' className='order-form_label'>Make my order priority</label>
         </div>
 
