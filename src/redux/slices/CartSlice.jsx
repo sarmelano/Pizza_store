@@ -41,9 +41,15 @@ const CartSlice = createSlice({
 
     resetCart: (state) => {
       state.items = [];
-    }
+    },
+    updateTotalPrice: (state) => {
+      state.totalPrice = state.items.reduce((total, item) => total + item.unitPrice * item.qty, 0).toFixed(2);
+    },
+    /* togglePriority: (state) => {
+      state.priority = !state.priority; 
+    }, */
   }
 });
 
-export const { addToCart, incrementQty, decrementQty, removeFromCart, resetCart } = CartSlice.actions;
+export const { addToCart, incrementQty, decrementQty, removeFromCart, resetCart, updateTotalPrice, /* togglePriority */ } = CartSlice.actions;
 export default CartSlice.reducer;

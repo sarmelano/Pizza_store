@@ -1,0 +1,40 @@
+.order-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 3dvh;
+ 
+
+  &_wrapper {
+    width: 45vw;
+    margin: 0 auto;
+    padding-top: 10dvh;
+  }
+
+  &_checkbox-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  &_label {
+    font-family: 'Marcellus', serif;
+    margin-left: 1vw;
+    cursor: pointer;
+  }
+
+  &_btn-wrapper {
+    margin-top: 2dvh;
+  }
+
+  &_total-price {
+    margin-left: 1vw;
+    font-weight: bold;
+  }
+
+}
+
+.a{
+
+  background-color: rgba(255, 255, 255, 0.073);
+
+}

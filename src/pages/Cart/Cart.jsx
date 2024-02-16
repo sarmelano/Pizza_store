@@ -1,6 +1,6 @@
-import React, { useMemo, useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { decrementQty, incrementQty, removeFromCart, resetCart } from '../../redux/slices/CartSlice';
+import { decrementQty, incrementQty, removeFromCart, resetCart, updateTotalPrice } from '../../redux/slices/CartSlice';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPizzaSlice } from '@fortawesome/free-solid-svg-icons';
@@ -12,25 +12,22 @@ const Cart = () => {
   const userName = useSelector((state)=> state.user.name);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { items } = useSelector(state => state.cart);
+  const { items, totalPrice } = useSelector(state => state.cart);
 
   const emptyCart = items.length === 0;
   const [modalOpen, setModalOpen] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
 
   const handleGoback = useCallback(() => navigate('/menu'), [navigate]);
-  const totalPrice = useMemo(() => items.reduce((total, item) => total + item.unitPrice * item.qty, 0).toFixed(2), [items]);
 
-  const handleIncrementCartQty = useCallback((id) => dispatch(incrementQty(id)), [dispatch]); //useCallback to wrap the event handlers to prevent unnecessary re-renders.
-  const handleDecrementCartQty = useCallback((id) => dispatch(decrementQty(id)), [dispatch]);
-  const handleRemoveFromCart = useCallback((id) => {
-    setItemToDelete(id);
-    setModalOpen(true);
-  }, []);
+  const handleIncrementCartQty = useCallback((id) => {dispatch(incrementQty(id)); dispatch(updateTotalPrice());}, [dispatch]); //useCallback to wrap the event handlers to prevent unnecessary re-renders.
+  const handleDecrementCartQty = useCallback((id) => {dispatch(decrementQty(id)); dispatch(updateTotalPrice());}, [dispatch]);
+  const handleRemoveFromCart = useCallback((id) => {setItemToDelete(id); setModalOpen(true);}, []);
 
   const handleDelete = useCallback(() => {
     if (itemToDelete) {
       dispatch(removeFromCart(itemToDelete));
+      dispatch(updateTotalPrice());
       setModalOpen(false);
     }
   }, [dispatch, itemToDelete]);
@@ -46,6 +43,10 @@ const Cart = () => {
   const handleResetCart = useCallback(() => {
     dispatch(resetCart());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(updateTotalPrice()); 
+  }, [dispatch, items]);
 
   return (
     <div className='cart-wrapper'>
