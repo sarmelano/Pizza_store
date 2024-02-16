@@ -2,13 +2,14 @@ import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { validationSchema } from './validationSchema';
 import CustomTextField from './CustomTextField';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './OrderForm.scss'
+import { togglePriority } from '../../redux/slices/CartSlice';
 
 const OrderForm = () => {
   const userName = useSelector((state) => state.user.name);
   const { totalPrice } = useSelector(state => state.cart);
-
+  const dispatch = useDispatch();
 
   const { control, handleSubmit, formState: { errors }, reset } = useForm({
     defaultValues: {
@@ -26,8 +27,11 @@ const OrderForm = () => {
     console.log(data);
     reset();
   }
-  
 
+  const handlePriorityChange = (e) => {
+    dispatch(togglePriority());
+  }
+  
   return (
     <div className='order-form_wrapper'>
       <h2>Ready to order? Let's go!</h2>
@@ -42,7 +46,7 @@ const OrderForm = () => {
             name="priority"
             control={control}
             render={({ field }) => (
-              <input type="checkbox" id="priority" {...field} />
+              <input type="checkbox" id="priority" {...field} onChange={handlePriorityChange} />
             )}
           />
           <label htmlFor='priority' className='order-form_label'>Make my order priority</label>
