@@ -4,6 +4,7 @@ const initialState = {
   items: [],
   totalPrice: 0,
   priority: false,
+  priorityPrice: 0,
 };
 
 const calculateTotalPrice = (items) => {
@@ -57,8 +58,10 @@ const CartSlice = createSlice({
     togglePriority: (state) => {
       if (!state.priority) {
         state.totalPrice = (parseFloat(state.totalPrice) + 8).toFixed(2); // if priority
+        state.priorityPrice = 8;
       } else {
         state.totalPrice = (parseFloat(state.totalPrice) - 8).toFixed(2); // if not priority
+        state.priorityPrice = 0;
       }
       state.priority = !state.priority; // Change state after changing totalPrice
     },

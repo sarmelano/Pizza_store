@@ -19,7 +19,7 @@ const OrderForm = () => {
     defaultValues: {
       name: userName,
       email: '',
-      cardNumber: '',
+      phone: '',
       address: '',
     },
     resolver: yupResolver(validationSchema),
@@ -31,7 +31,7 @@ const OrderForm = () => {
       const orderData = {
         customer: data.name,
         email: data.email,
-        card: data.cardNumber,
+        phone: data.phone,
         address: data.address,
         priority: priority,
         position: '',
@@ -40,7 +40,7 @@ const OrderForm = () => {
           pizzaId: item.id,
           quantity: item.qty,
           unitPrice: item.unitPrice,
-          totalPrice: (item.qty * item.unitPrice).toFixed(2),
+          totalPrice: totalPrice
         }))
       };
       const response = await fetch('https://react-fast-pizza-api.onrender.com/api/order', {
@@ -55,7 +55,7 @@ const OrderForm = () => {
       if (response.ok) {
         const { id, status, data } = responseData;
         if (status === "success") {
-          navigate(`/order/${id}`, { state: { orderData: data } });
+          navigate(`/order/${id}`, { state: { orderData: responseData.data } });
         } else {
           alert("Something went wrong");
         }
@@ -80,7 +80,7 @@ const OrderForm = () => {
       <form className='order-form' onSubmit={handleSubmit(onSubmit)}>
         <CustomTextField control={control} name="name" label="Name" errors={errors} />
         <CustomTextField control={control} name="email" label="Email" errors={errors} />
-        <CustomTextField control={control} name="cardNumber" label="Card Number" errors={errors} />
+        <CustomTextField control={control} name="phone" label="Phone" errors={errors} />
         <CustomTextField control={control} name="address" label="Address" errors={errors} />
 
         <div className='order-form_checkbox-wrapper'>
