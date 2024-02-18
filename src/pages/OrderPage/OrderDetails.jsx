@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
 
 const OrderDetails = () => {
   const { state } = useLocation();
   const priorityCost = 8;
+  const [priorityAdded, setPriorityAdded] = useState(false);
+
 
   if (!state || !state.orderData) {
     return <div>Loading...</div>;
@@ -16,6 +18,10 @@ const OrderDetails = () => {
   const formattedEstimatedDelivery = moment(orderData.estimatedDelivery).format('MMM DD, h:mmA');
 
   const pizzaTotalPrice = orderData.cart.reduce((total, item) => total + (item.unitPrice * item.quantity), 0);
+  const handleAddPriority = () => {
+    setPriorityAdded(true);
+    orderData.priority = true;
+  };
 
   return (
     <div className='orderDetails_block'>
@@ -40,9 +46,11 @@ const OrderDetails = () => {
 
       <div className='orderDetails-prices_block'>
         <p>Price pizza:  ${pizzaTotalPrice.toFixed(2)}</p>
-        <p className='prices_block__priority'>Price priority:  {orderData.priority ? `$${priorityCost.toFixed(2)}` : '$0.00'}</p>
+         {orderData.priority && <p className='prices_block__priority'>Price priority: ${priorityCost.toFixed(2)}</p>}
         <p>To pay on delivery:  ${(orderData.priority ? (pizzaTotalPrice + priorityCost).toFixed(2) : pizzaTotalPrice.toFixed(2))}</p>
       </div>
+
+      {!priorityAdded && !orderData.priority && <div className="priority-btn"><button onClick={handleAddPriority} className='cart-btn prioritize-btn'>PRIORITIZE</button></div>}
     </div>
   );
 };
