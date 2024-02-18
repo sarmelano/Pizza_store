@@ -1,13 +1,13 @@
-import React from 'react';
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { validationSchema } from './validationSchema';
 import CustomTextField from './CustomTextField';
 import { togglePriority } from '../../redux/slices/CartSlice';
+import moment from 'moment';
 import './OrderForm.scss';
-import { useNavigate } from 'react-router-dom';
 
 const OrderForm = () => {
   const userName = useSelector((state) => state.user.name);
@@ -40,9 +40,13 @@ const OrderForm = () => {
           pizzaId: item.id,
           quantity: item.qty,
           unitPrice: item.unitPrice,
-          totalPrice: totalPrice
-        }))
+          totalPrice: totalPrice,
+          ingredients: item.ingredients,
+        })),
+
+        estimatedDelivery: moment().toISOString()
       };
+
       const response = await fetch('https://react-fast-pizza-api.onrender.com/api/order', {
         method: 'POST',
         headers: {
@@ -53,8 +57,9 @@ const OrderForm = () => {
       const responseData = await response.json();
 
       if (response.ok) {
-        const { id, status, data } = responseData;
+        const { data, status } = responseData;
         if (status === "success") {
+          const { id } = data; // pull if from data
           navigate(`/order/${id}`, { state: { orderData: responseData.data } });
         } else {
           alert("Something went wrong");
