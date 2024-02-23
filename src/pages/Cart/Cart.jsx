@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPizzaSlice } from '@fortawesome/free-solid-svg-icons';
 import DeleteConfirmModal from '../../components/DeleteConfirmModal';
 import CartItem from '../../components/CartItem';
-import './Cart.scss';
+import './cart.scss';
 
 const Cart = () => {
   const navigate = useNavigate();
